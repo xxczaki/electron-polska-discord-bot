@@ -7,7 +7,7 @@ const client = new Discord.Client();
 // Keep (Free) Heroku alive
 setInterval(() => {
 	http.get('http://electron-polska-bot.herokuapp.com');
-}, 300000);
+}, 100000);
 
 // Convert to ms
 function round(n, k) {
