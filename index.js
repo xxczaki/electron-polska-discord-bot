@@ -1,7 +1,13 @@
 const Discord = require('discord.js');
+const http = require("http");
 const config = require('./config.json');
 
 const client = new Discord.Client();
+
+// Keep (Free) Heroku alive
+setInterval(function() {
+    http.get("http://electron-polska-bot.herokuapp.com");
+}, 300000); 
 
 // Convert to ms
 function round(n, k) {
