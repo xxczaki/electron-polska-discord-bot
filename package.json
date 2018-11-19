@@ -1,0 +1,23 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "My Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo"
+  },
+  "author": "Antoni Kepinski <a@kepinski.me> (https://kepinski.me)",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  },
+  "devDependencies": {
+    "xo": "*"
+  },
+  "xo": {
+    "rules": {
+        "camelcase": 0,
+        "no-useless-concat": 0
+      }
+  }
+}
