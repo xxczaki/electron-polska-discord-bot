@@ -17,8 +17,8 @@
   },
   "xo": {
     "rules": {
-        "camelcase": 0,
-        "no-useless-concat": 0
-      }
+      "camelcase": 0,
+      "no-useless-concat": 0
+    }
   }
 }

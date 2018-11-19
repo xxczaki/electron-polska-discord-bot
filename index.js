@@ -48,7 +48,7 @@ client.on('message', async message => {
          `,
 					footer: {
 						icon_url: 'https://imgur.com/I04By3T.png',
-						text: 'Bot rozwijany jest przez @Linux#5617'
+						text: 'Bot rozwijany jest przez Linuxa'
 					}
 				};
 				await message.channel.send({embed});
@@ -72,7 +72,7 @@ client.on('message', async message => {
          `,
 					footer: {
 						icon_url: 'https://imgur.com/I04By3T.png',
-						text: 'Bot rozwijany jest przez @Linux#5617'
+						text: 'Bot rozwijany jest przez Linuxa'
 					}
 				};
 				await message.channel.send({embed});
@@ -91,7 +91,7 @@ client.on('message', async message => {
 					description: `Twój ping wynosi około: ${'`' + round(ping, 0) + 'ms' + '`'}`,
 					footer: {
 						icon_url: 'https://imgur.com/I04By3T.png',
-						text: 'Bot rozwijany jest przez @Linux#5617'
+						text: 'Bot rozwijany jest przez Linuxa'
 					}
 				};
 				await message.channel.send({embed});
