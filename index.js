@@ -12,7 +12,7 @@ function round(n, k) {
 // Ready state
 client.on('ready', () => {
 	console.log(`Zalogowano jako ${client.user.tag}!`);
-	client.user.setActivity('W budowie...');
+	client.user.setActivity('!pomoc');
 });
 
 // Send a welcome message, if a new member joins the server
