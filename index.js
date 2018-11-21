@@ -131,4 +131,4 @@ client.on('message', async message => {
 });
 
 // Login using Discord Bot's token
-client.login(config.githubToken);
+client.login(config.botToken);
