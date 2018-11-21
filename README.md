@@ -14,7 +14,7 @@ Run the bot:
 npm start
 ```
 
-# Commands
+## Commands
 
 ```
 !pomoc - Show help message
@@ -23,7 +23,7 @@ npm start
 !changelog - Get changelog from the latest Electron version
 ```
 
-# Config
+## Config
 
 Config is stored in the [`config.js`](https://github.com/xxczaki/discord-bot/blob/master/config.json) file:
 
@@ -41,10 +41,10 @@ Your Discord Bot's token. Get one [here](https://discordapp.com/developers/appli
 
 This bot is using the Github's GraphQL API v4. You will need to create a personal access token with the `public_repo` scope [here](https://github.com/settings/tokens).
 
-# Info
+## Info
 
 Inspired by [Wykoparka](https://github.com/SerekKiri/Wykoparka) :smile:
 
-## License
+### License
 
 MIT
