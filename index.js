@@ -1,13 +1,10 @@
-const http = require('http');
 const Discord = require('discord.js');
+const latestVersion = require('latest-version');
+const {GitHub} = require('github-graphql-api');
 const config = require('./config.json');
 
 const client = new Discord.Client();
-
-// Keep (Free) Heroku alive
-setInterval(() => {
-	http.get('http://electron-polska-bot.herokuapp.com');
-}, 100000);
+const github = new GitHub({token: config.githubToken});
 
 // Convert to ms
 function round(n, k) {
@@ -44,6 +41,7 @@ client.on('message', async message => {
 					description: `
 !pomoc - wyświetla wiadomość pomocniczą
 !linki - wyświetla listę przydatnych linków
+!changelog - wyświetla opis zmian dokonanych w najnowszej wersji Electrona
 !ping - podaje ping użytkownika
          `,
 					footer: {
@@ -99,8 +97,38 @@ client.on('message', async message => {
 				console.log(error);
 			}
 		}
+
+		// Get changelog from the latest Electron version
+		if (command === 'changelog') {
+			try {
+				const version = await latestVersion('electron');
+				const info = await github.query(`
+				{
+					repository(owner: "electron", name: "electron") {
+					  release(tagName: "v${version}") {
+						description
+					  }
+					}
+				  }				  
+				`);
+				const embed = {
+					title: `Electron ${version}`,
+					color: 0x01579B,
+					description: `
+					${'```markdown\n' + info.repository.release.description + '\n' + '```'}
+					`,
+					footer: {
+						icon_url: 'https://imgur.com/I04By3T.png',
+						text: 'Bot rozwijany jest przez Linuxa'
+					}
+				};
+				await message.channel.send({embed});
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	}
 });
 
-// Set bot's token using Heroku Variables
-client.login(process.env.TOKEN);
+// Login using Discord Bot's token
+client.login(config.githubToken);

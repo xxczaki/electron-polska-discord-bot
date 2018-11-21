@@ -1,3 +1,5 @@
 {
-    "prefix": "!"
+    "prefix": "!",
+    "botToken": "",
+    "githubToken": ""
 }
