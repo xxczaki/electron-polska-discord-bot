@@ -19,8 +19,8 @@ client.on('ready', () => {
 });
 
 // Send a welcome message, if a new member joins the server
-client.on('guildMemberAdd', member => {
-	const channel = member.guild.channels.find(ch => ch.name === 'powitania');
+client.on('guildMemberAdd', async member => {
+	const channel = await member.guild.channels.find(ch => ch.name === 'powitania');
 	if (!channel) {
 		return;
 	}
