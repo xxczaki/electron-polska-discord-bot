@@ -1,10 +1,33 @@
 const Discord = require('discord.js');
 const latestVersion = require('latest-version');
-const {GitHub} = require('github-graphql-api');
+const {GraphQLClient} = require('graphql-request');
 const config = require('./config.json');
 
 const client = new Discord.Client();
-const github = new GitHub({token: config.githubToken});
+
+const getChangelog = async version => {
+	const endpoint = 'https://api.github.com/graphql';
+
+	const graphQLClient = new GraphQLClient(endpoint, {
+		headers: {
+			Authorization: `bearer ${config.githubToken}`
+		}
+	});
+
+	const query = `
+	  {
+		  repository(owner: "electron", name: "electron") {
+			release(tagName: "v${version}") {
+			  description
+			}
+		  }
+	  }	
+	  `;
+
+	const data = await graphQLClient.request(query);
+
+	return data.repository.release.description;
+};
 
 // Convert to ms
 function round(n, k) {
@@ -111,15 +134,7 @@ client.on('message', async message => {
 	if (command === 'changelog') {
 		try {
 			const version = await latestVersion('electron');
-			const info = await github.query(`
-				{
-					repository(owner: "electron", name: "electron") {
-					  release(tagName: "v${version}") {
-						description
-					  }
-					}
-				  }				  
-				`);
+			const changelog = await getChangelog(version);
 
 			const releaseDescription = () => {
 				console.log();
@@ -130,7 +145,7 @@ client.on('message', async message => {
 				title: `Electron ${version}`,
 				color: 0x01579B,
 				description: `
-					${'```markdown\n' + info.repository.release.description + '\n' + '```'}
+					${'```markdown\n' + changelog + '\n' + '```'}
 					`,
 				footer: {
 					icon_url: 'https://imgur.com/I04By3T.png',
