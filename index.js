@@ -78,7 +78,7 @@ client.on('message', async message => {
          `,
 				footer: {
 					icon_url: 'https://imgur.com/I04By3T.png',
-					text: 'Bot rozwijany jest przez Linuxa'
+					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
 			await message.channel.send({embed});
@@ -102,7 +102,7 @@ client.on('message', async message => {
          `,
 				footer: {
 					icon_url: 'https://imgur.com/I04By3T.png',
-					text: 'Bot rozwijany jest przez Linuxa'
+					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
 			await message.channel.send({embed});
@@ -121,7 +121,7 @@ client.on('message', async message => {
 				description: `Czas odpowiedzi serwera wyniósł ${'`' + round(ping, 0) + 'ms' + '`'}`,
 				footer: {
 					icon_url: 'https://imgur.com/I04By3T.png',
-					text: 'Bot rozwijany jest przez Linuxa'
+					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
 			await message.channel.send({embed});
@@ -149,7 +149,7 @@ client.on('message', async message => {
 					`,
 				footer: {
 					icon_url: 'https://imgur.com/I04By3T.png',
-					text: 'Bot rozwijany jest przez Linuxa'
+					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
 			await message.channel.send({embed});
