@@ -27,7 +27,7 @@ npm start
 
 ## Config
 
-Config is stored in the [`config.js`](https://github.com/xxczaki/discord-bot/blob/master/config.json) file:
+Config is stored in the [`config.json`](https://github.com/xxczaki/discord-bot/blob/master/config.json) file:
 
 **prefix**
 
