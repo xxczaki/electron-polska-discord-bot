@@ -12,7 +12,7 @@
   "dependencies": {
     "discord.js": "^11.4.2",
     "graphql-request": "^1.8.2",
-    "latest-version": "^4.0.0"
+    "latest-version": "^5.1.0"
   },
   "devDependencies": {
     "xo": "*"
