@@ -1,14 +1,18 @@
 const Discord = require('discord.js');
 const latestVersion = require('latest-version');
 const {GraphQLClient} = require('graphql-request');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
 const config = require('./config.json');
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
 
 const client = new Discord.Client();
 
+// Get changelog of the Electron project
 const getChangelog = async version => {
-	const endpoint = 'https://api.github.com/graphql';
-
-	const graphQLClient = new GraphQLClient(endpoint, {
+	const graphQLClient = new GraphQLClient('https://api.github.com/graphql', {
 		headers: {
 			Authorization: `bearer ${config.githubToken}`
 		}
@@ -39,6 +43,39 @@ function round(n, k) {
 client.on('ready', () => {
 	console.log(`Zalogowano jako ${client.user.tag}!`);
 	client.user.setActivity('!pomoc');
+
+	// Every 2 days check for the new Electron version and notify if it's available
+	setInterval(async () => {
+		const channel = await client.channels.get('526127851813076992');
+
+		if (!channel) {
+			return;
+		}
+
+		const version = await latestVersion('electron');
+
+		if (db.get('version').value() === version.toString()) {
+			console.log('No new Electron version was released.');
+		} else {
+			const changelog = await getChangelog(version);
+
+			const embed = {
+				title: `NEW Electron version released: ${version}`,
+				color: 0x01579B,
+				description: `
+					${'```markdown\n' + changelog + '\n' + '```'}
+					`,
+				footer: {
+					icon_url: 'https://imgur.com/I04By3T.png',
+					text: 'Electron Polska Bot by xxczaki'
+				}
+			};
+
+			await channel.send({embed});
+
+			db.set('version', version).write();
+		}
+	}, 172800);
 });
 
 // Send a welcome message, if a new member joins the server
@@ -74,13 +111,14 @@ client.on('message', async message => {
 !pomoc - wyświetla wiadomość pomocniczą
 !linki - wyświetla listę przydatnych linków
 !changelog - wyświetla opis zmian dokonanych w najnowszej wersji Electrona
-!ping - podaje ping serwera
+!ping - podaje czas odpowiedzi serwera
          `,
 				footer: {
 					icon_url: 'https://imgur.com/I04By3T.png',
 					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
+
 			await message.channel.send({embed});
 		} catch (error) {
 			console.log(error);
@@ -105,6 +143,7 @@ client.on('message', async message => {
 					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
+
 			await message.channel.send({embed});
 		} catch (error) {
 			console.log(error);
@@ -124,6 +163,7 @@ client.on('message', async message => {
 					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
+
 			await message.channel.send({embed});
 		} catch (error) {
 			console.log(error);
@@ -136,11 +176,6 @@ client.on('message', async message => {
 			const version = await latestVersion('electron');
 			const changelog = await getChangelog(version);
 
-			const releaseDescription = () => {
-				console.log();
-			};
-
-			releaseDescription();
 			const embed = {
 				title: `Electron ${version}`,
 				color: 0x01579B,
@@ -152,6 +187,7 @@ client.on('message', async message => {
 					text: 'Electron Polska Bot by xxczaki'
 				}
 			};
+
 			await message.channel.send({embed});
 		} catch (error) {
 			console.log(error);
