@@ -10,9 +10,10 @@
   "author": "Antoni Kepinski <a@kepinski.me> (https://kepinski.me)",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.5.1",
     "graphql-request": "^1.8.2",
-    "latest-version": "^5.1.0"
+    "latest-version": "^5.1.0",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
     "xo": "*"
