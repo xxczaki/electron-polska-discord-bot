@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "xo"
+    "test": "xo",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Antoni Kepinski <a@kepinski.me> (https://kepinski.me)",
   "license": "MIT",
@@ -13,7 +15,8 @@
     "discord.js": "^11.5.1",
     "graphql-request": "^1.8.2",
     "latest-version": "^5.1.0",
-    "lowdb": "^1.0.0"
+    "lowdb": "^1.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "xo": "*"
@@ -23,5 +26,6 @@
       "camelcase": 0,
       "no-useless-concat": 0
     }
-  }
+  },
+  "snyk": true
 }
