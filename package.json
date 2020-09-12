@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "graphql-request": "^1.8.2",
+    "graphql-request": "^2.0.0",
     "latest-version": "^5.1.0",
     "lowdb": "^1.0.0"
   },
